@@ -176,3 +176,10 @@ function open_deploy() {
     "_blank"
   );
 }
+
+function open_code() {
+  window.open(
+    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}`,
+    "_blank"
+  );
+}
