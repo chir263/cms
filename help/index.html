@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+  <link rel="stylesheet" href="../css/help.css" />
+  <body>
+    <script src="./help-data.js"></script>
+
+    <div class="slideshow-container">
+      <script>
+        for (let i = 1; i <= HELP_DATA.length; i++) {
+          let file = HELP_DATA[i - 1].file;
+          let caption = HELP_DATA[i - 1].caption;
+          document.write(`
+          <div class="mySlides fade">
+            <div class="numbertext">${i} / ${HELP_DATA.length}</div>
+            <div class="text">${caption}</div>
+            <div class="slide-content">
+              <div id="markdown-content-${i}" class="markdown-content"></div>
+            </div>
+          </div>
+        `);
+          fetch(file)
+            .then((response) => response.text())
+            .then((markdown) => {
+              const converter = new showdown.Converter({
+                simplifiedAutoLink: true,
+                excludeTrailingPunctuationFromURLs: true,
+                openLinksInNewWindow: true,
+                strikethrough: true,
+                tables: true,
+                tasklists: true,
+                ghCodeBlocks: true,
+                smoothLivePreview: true,
+                smartIndentationFix: true,
+                disableForced4SpacesIndentedSublists: true,
+                simpleLineBreaks: true,
+                requireSpaceBeforeHeadingText: true,
+              });
+              const html = converter.makeHtml(markdown);
+              document.getElementById(`markdown-content-${i}`).innerHTML = html;
+            });
+        }
+      </script>
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+    <!-- <br /> -->
+
+    <div style="text-align: center">
+      <script>
+        for (let i = 1; i <= HELP_DATA.length; i++) {
+          document.write(`
+            <span class="dot" onclick="currentSlide(${i})" title="${
+            HELP_DATA[i - 1].caption
+          }"></span>
+        `);
+        }
+      </script>
+    </div>
+
+    <script>
+      var slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../images/favicon.ico"
+    />
+    <link rel="stylesheet" href="../css/admin.css" />
+    <title>Content Manager</title>
+    <script src="./js/config.js"></script>
+  </head>
+  <body>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <iframe class="iframe-section" src="../help"></iframe>
+      </div>
+    </div>
+
+    <div id="bottom-menu">
+      <button class="myBtn" id="myBtn" title="Help">
+        <i class="fa fa-info-circle" style="font-size: 36px; color: white"></i>
+      </button>
+      <button
+        class="myBtn"
+        id="myBtn"
+        title="Deployment Link"
+        onclick="open_deploy()"
+      >
+        <i class="fa fa-link" style="font-size: 36px; color: white"></i>
+      </button>
+      <button class="myBtn" title="Back to Home" onclick="back_to_home()">
+        <i class="fa fa-home" style="font-size: 36px; color: white"></i>
+      </button>
+    </div>
+
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      CMS.init({ config: CMS_CONFIG });
+    </script>
+    <script src="./js/mutation.js"></script>
+    <script src="./js/modal.js"></script>
+  </body>
+</html>

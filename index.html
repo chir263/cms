@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virtual Labs - Content Management Tool</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./images/favicon.ico"
+    />
+    <script>
+      function switchTab(tab) {
+        const tabSections = document.getElementsByClassName("tab-section");
+        const tabLinks = document.getElementsByClassName("nav-link");
+
+        for (let i = 0; i < tabSections.length; i++) {
+          tabSections[i].classList.remove("active");
+        }
+
+        for (let i = 0; i < tabLinks.length; i++) {
+          tabLinks[i].classList.remove("active");
+        }
+
+        const selectedTabSection = document.getElementById(tab + "Section");
+        const selectedTabLink = document.querySelector(`#${tab}`);
+        console.log(selectedTabLink, selectedTabSection);
+        if (selectedTabSection && selectedTabLink) {
+          selectedTabSection.classList.add("active");
+          selectedTabLink.classList.add("active");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <img
+        src="./images/download.png"
+        width="100px"
+        height="50px"
+        style="float: left"
+      />
+      <h1 class="title">Content Management Tool</h1>
+      <h1 id="user">Welcome Guest</h1>
+      <script>
+        let user_name =
+      JSON.parse(localStorage.getItem("netlify-cms-user"))?.login ;
+        if (user_name){
+          document.getElementById('user').innerHTML = `Hi, ${user_name}`;
+        }
+      </script>
+      <nav class="nav">
+        <div class="nav-item">
+          <button
+            class="nav-link active"
+            id="create"
+            onclick="switchTab('create')"
+            style="margin-right: 0; border-top-left-radius: 15px"
+          >
+            Create Experiment
+          </button>
+        </div>
+        <div class="nav-item">
+          <button
+            class="nav-link"
+            id="modify"
+            onclick="switchTab('modify')"
+            style="margin-left: 0; border-top-right-radius: 15px"
+          >
+            Modify Experiment
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="createSection" class="tab-section active">
+        <h1>Create Experiment</h1>
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-image">
+            <img src="./images/step-1.png" alt="Creating a GitHub Account" class="myImg" />
+          </div>
+          <div class="step-description">
+            <h2 class="step-title">Creating a GitHub Account</h2>
+            <p class="step-text">
+              Make sure you have a GitHub. account. If you don't have one, you
+              can sign up for free at
+              <a href="https://github.com/signup" target="_blank">GitHub</a>.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="step">
+          <div class="step-description" style="padding-right: 10px;">
+            <h2 class="step-title">Creating Experiment in Virtual Labs</h2>
+            <p class="step-text">
+              Follow the instructions in the engineers forum repository to create an experiment in Virtual Labs:
+              <a
+                href="https://github.com/virtual-labs-cms/engineers-forum"
+                target="_blank"
+                >Engineers forum</a
+              >.
+              
+            </p>
+          </div>
+          
+          <div class="step-description">
+            <h2 class="step-title">Creating Experiment in your organization</h2>
+            <p class="step-text">
+              Create an experiment within your organization by following the steps outlined below.
+              
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-description">
+            <h2 class="step-title">Using Experiment GitHub Template</h2>
+            <p class="step-text">
+              Access the experiment template directly by clicking on the
+              provided link:
+              <a
+                href="https://github.com/virtual-labs-cms/exp-template"
+                target="_blank"
+                >template</a
+              >.
+              <ul class="step-text">
+                <li>You will be redirected to the template's page, where you'll
+              find a green button labeled <b>Use this template</b></li>
+              
+              <li>
+              Click on <b>Create a new repository</b>.
+              </li>
+              </ul>
+            </p>
+          </div>
+          <div class="step-image">
+            <img src="./images/step-2.png" alt="Using Experiment GitHub Template" class="myImg" />
+          </div>
+          
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-image">
+            <img src="./images/step-3.png" alt="Completing Git Template and Creating Repository" class="myImg"/>
+          </div>
+          <div class="step-description">
+            <h2 class="step-title">Completing Git Template and Creating Repository</h2>
+            <p class="step-text">
+              Fill up required details.
+              <ul class="step-text">
+                <li>Repository name should be experiment name. </li>
+                  <li>Name format <b>exp-&lt;expName&gt;-&lt;devInstituteName&gt;</b> e.g. exp-geometry-optimization-molecules-iiith</li>
+              <li>
+                Description about experiment. (Optional)
+              </li>
+              <li>
+              Must select <b>Include all branches</b>.
+              </li>
+              <li>
+                Click on <b>Create repository from template</b>
+              </li>
+              <li>
+               <a href="#secret">Steup Secret Token.</a>
+              </li>
+              </ul>
+            </p>
+          </div>
+        </div>
+         <div class="step">
+          <div class="step-number">4</div>
+          
+          <div class="step-description">
+            <h2 class="step-title">Modifying Experiments</h2>
+            <p class="step-text">
+              Click on the <b>Modify Experiment</b> tab in the navigation bar.
+            </p>
+          </div>
+          <div class="step-image">
+            <img src="./images/step-5.png" alt="Modifying Experiments" class="myImg"/>
+          </div>
+        </div>
+
+
+        <h1  id="secret" style="padding-top: 100px;" >Setup Secret Token</h1>
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-image">
+            <img src="./images/sec-1.png" alt="Creating a GitHub Account" class="myImg" />
+          </div>
+          <div class="step-description">
+            <h2 class="step-title">Setting up new secret</h2>
+            <p class="step-text">
+              <ul>
+                <li>Go to repository page <b>Setting</b> > <b>Secrets and variables</b> > <b>Actions</b>.</li>
+                <li>Click on <b>New repository secret</b>.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-description">
+            <h2 class="step-title">Creating new Secret</h2>
+            <p class="step-text">
+              <ul>
+                <li>Enter <b>secret name</b> as `ORG_OWNER_GITHUB_TOKEN`.</li>
+                <li>Create <a href="https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">Personal Access Token</a>.</li>
+                <li>Paste that token into <b>Secret</b>.</li>
+                <li>Click on  <b>Add secret</b>.</li>
+              
+              </ul>
+            </p>
+          </div>
+          <div class="step-image">
+            <img src="./images/sec-2.png" alt="Using Experiment GitHub Template" class="myImg" />
+          </div>
+          
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-image">
+            <img src="./images/sec-3.png" alt="Completing Git Template and Creating Repository" class="myImg"/>
+          </div>
+          <div class="step-description">
+            <h2 class="step-title">Setting up permissions for workflow</h2>
+            <p class="step-text">
+              <ul>
+                <li>Go to repository page <b>Setting</b> > <b>Actions</b> > <b>General</b>.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+         <div class="step">
+          <div class="step-number">4</div>
+          
+          <div class="step-description">
+            <h2 class="step-title">Giving read and write permissions</h2>
+            <p class="step-text">
+              Select <b>Read and write permissions</b> under <b>Workflow permissions</b> heading.
+            </p>
+          </div>
+          <div class="step-image">
+            <img src="./images/sec-4.png" alt="Modifying Experiments" class="myImg"/>
+          </div>
+        </div>
+      </section>
+
+      <section id="modifySection" class="tab-section">
+        <h1>Modify Experiment</h1>
+
+        <div class="step" style="width: 90%;">
+          <div class="step-description"  style="background-color: #ebebeb;padding: 10px;border-radius: 5px;">
+            <h2 class="step-title">Virtual Labs CMS</h2>
+            <p class="step-text">
+              <ul class="step-text">
+                <li>
+                <b>Experiment Repository Name:</b> Enter the name of the experiment repository under the "virtual-labs-cms" GitHub organization. 
+                </li>
+                <li>
+                <b>Note:</b> Ensure that you have the correct repository name and that it exists under the <b>virtual-labs-cms</b> organization and have <b>collaborator access</b> to this repository.
+                </li>
+              </ul>
+              
+              <div class="form-section">
+                <form id="cmsForm">
+                  <input
+                    type="text"
+                    id="nameInput"
+                    placeholder="Organization Name"
+                    autocomplete="off"
+                    style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;border-right: 2px solid #dddddd;"
+                    value="virtual-labs-cms"
+                    disabled="true"
+                    required
+                  />
+                  <input
+                    type="text"
+                    id="vlab-inp-rep"
+                    placeholder="Experiment Repository Name"
+                    autocomplete="off"
+                    style="width:40%"
+                    required
+                  />
+                  <button type="submit">Modify</button>
+                </form>
+              </div>
+            </p>
+          </div>
+          <div style="width: 10px;"></div>
+          <div class="step-description" style="background-color: #ebebeb;padding: 10px;border-radius: 5px;">
+            <h2 class="step-title">Your Organization</h2>
+            <p class="step-text">
+              <ul class="step-text">
+                <li><b>Organization Name:</b> Enter the name of your GitHub organization where the experiment repository resides.</li>
+              <li>
+              <b>Experiment Repository Name:</b> Enter the name of the experiment repository within your organization.
+              </li>
+              </ul>
+              <div class="form-section">
+                <form id="userForm">
+                  <input
+                    type="text"
+                    id="user-inp-org"
+                    placeholder="Organization Name"
+                    autocomplete="off"
+                    style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;border-right: 2px solid #dddddd;"
+                    required
+                  />
+                  <input
+                    type="text"
+                    id="user-inp-rep"
+                    placeholder="Experiment Repository Name"
+                    autocomplete="off"
+                    style="width:40%"
+                    required
+                  />
+                  <button type="submit">Modify</button>
+                </form>
+              </div>
+            </p>
+          </div>
+        </div>
+        <div class="step">
+          <!-- <div class="step-number">4</div> -->
+          
+          <div class="step-description">
+            <h2 class="step-title">Accessing Experiment Editing Page via Authentication</h2>
+            <p class="step-text">
+              <ul class="step-text">
+                <li>
+              Fill up required details.
+                </li>
+                  <li>Submit the above form.</li>
+                  <li>You will be redirected to an authentication page.</li>
+                  <li>If you are not already logged in, look for the <b>Login with GitHub</b> option.</li>
+                  <li>Click on <b>Login with GitHub</b> to authenticate yourself.</li>
+                  <li>Once authenticated, you will be redirected to the experiment editing page.</li>
+              </ul>
+            </p>
+          </div>
+          <div class="step-image">
+            <img src="./images/step-4.png" alt="Accessing Experiment Editing Page via Authentication" class="myImg"/>
+          </div>
+        </div>
+        <div class="step">
+           <div class="step-image">
+            <img src="./images/step-6.png" alt="Accessing Experiment Editing Page via Authentication" class="myImg"/>
+          </div>
+          <div class="step-description">
+            <h2 class="step-title">Navigation Buttons on Experiment Editing Page</h2>
+            <p class="step-text">
+              The experiment editing page will always contain two fixed buttons located at the bottom right corner:
+              <ul class="step-text">
+
+              <li>   <b>Information Button:</b> To access the help manual or additional information, click on the "i" icon. This button will open the help manual, providing guidance and assistance related to the experiment editing process.</li>  
+              <li>   <b>Deployment Button:</b> To redirect the user to the deployment link for experiment. This will be updated after each change. It may take 1-2 minutes to update site.</li>  
+                <li><b>Home Button:</b> To redirect the user to the landing page, click on the "Home" icon. This will take you back to the main page or starting point of the application.</li>  
+              
+            </ul>
+              Please utilize these buttons as needed for seamless navigation and accessing helpful resources during your editing experience.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01">
+      <div id="caption"></div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
+
+
+<!-- Failed to persist entry: API_ERROR: Although you appear to have the correct authorization
+  credentials, the `virtual-labs-cms` organization has enabled OAuth App access restrictions,
+  meaning that data access to third-parties is limited. For more information on these
+  restrictions, including how to enable this app,
+  visit https://docs.github.com/articles/restricting-access-to-your-organization-s-data/ -->
