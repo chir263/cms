@@ -178,8 +178,9 @@ function open_deploy() {
 }
 
 function open_code() {
+  let accessToken = JSON.parse(localStorage.getItem("netlify-cms-user")).token;
   window.open(
-    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}`,
+    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
     "_blank"
   );
 }
