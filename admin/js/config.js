@@ -184,6 +184,9 @@ function open_code() {
   //   "_blank"
   // );
   // Construct the redirect URL with the access token and repository information
-  const redirectUrl = `https://github.com/${ORGANISATION_NAME}/${EXPERIMENT}/codespaces?token=${accessToken}`;
+  const folderPath = "experiment/simulation";
+  const redirectUrl = `https://github.com/${ORGANISATION_NAME}/${EXPERIMENT}/codespaces?token=${accessToken}&folder=${encodeURIComponent(
+    folderPath
+  )}`;
   window.location.href = redirectUrl;
 }
