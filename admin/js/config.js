@@ -183,10 +183,7 @@ function open_code() {
   //   `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
   //   "_blank"
   // );
-  const username = "<username>";
-  const repository = "<repository>";
-
   // Construct the redirect URL with the access token and repository information
-  const redirectUrl = `https://github.com/${username}/${repository}/codespaces?token=${accessToken}`;
+  const redirectUrl = `https://github.com/${ORGANISATION_NAME}/${EXPERIMENT}/codespaces?token=${accessToken}`;
   window.location.href = redirectUrl;
 }
