@@ -179,8 +179,14 @@ function open_deploy() {
 
 function open_code() {
   let accessToken = JSON.parse(localStorage.getItem("netlify-cms-user")).token;
-  window.open(
-    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
-    "_blank"
-  );
+  // window.open(
+  //   `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
+  //   "_blank"
+  // );
+  const username = "<username>";
+  const repository = "<repository>";
+
+  // Construct the redirect URL with the access token and repository information
+  const redirectUrl = `https://github.com/${username}/${repository}/codespaces?token=${accessToken}`;
+  window.location.href = redirectUrl;
 }
