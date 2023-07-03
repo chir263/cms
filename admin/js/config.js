@@ -200,7 +200,7 @@ async function open_code1() {
   try {
     // Step 1: Get the contents of the repository's root directory using GitHub API
     const response = await fetch(
-      `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main`,
+      `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main/expriment`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
