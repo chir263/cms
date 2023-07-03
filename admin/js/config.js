@@ -192,10 +192,48 @@ function open_code() {
 }
 
 function open_code1() {
-  let accessToken = JSON.parse(localStorage.getItem("netlify-cms-user")).token;
-  window.open(
-    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
-    "_blank"
-  );
+  const accessToken = JSON.parse(
+    localStorage.getItem("netlify-cms-user")
+  ).token;
+  // Replace 'YOUR_GITHUB_ACCESS_TOKEN' with your actual GitHub OAuth access token
+
+  document
+    .getElementById("open-folder-button")
+    .addEventListener("click", async () => {
+      try {
+        // Step 1: Get the contents of the repository's root directory using GitHub API
+        const response = await fetch(
+          `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        const contents = await response.json();
+
+        // Step 2: Find the folder you want to open (adjust the folder path accordingly)
+        console.log(contents);
+        const folder = contents.find((item) => item.name === "path/to/folder");
+
+        // if (!folder || folder.type !== "dir") {
+        //   console.error("Folder not found");
+        //   return;
+        // }
+
+        // // Step 3: Get the URL of the static site in CodeSandbox.io using the folder path
+        // const sandboxUrl = `https://codesandbox.io/s/github/{OWNER}/{REPO}/tree/main/${folder.path}`;
+
+        // // Step 4: Open the CodeSandbox.io URL in a new window or tab
+        // window.open(sandboxUrl, "_blank");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+
+  // window.open(
+  //   `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
+  //   "_blank"
+  // );
   // Construct the redirect URL with the access token and repository information
 }
