@@ -200,7 +200,7 @@ async function open_code1() {
   try {
     // Step 1: Get the contents of the repository's root directory using GitHub API
     const response = await fetch(
-      `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main/expriment`,
+      `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -209,20 +209,40 @@ async function open_code1() {
     );
     const contents = await response.json();
 
-    // Step 2: Find the folder you want to open (adjust the folder path accordingly)
-    console.log(contents);
-    const folder = contents.find((item) => item.name === "path/to/folder");
+    // Step 2: Find the 'experiment' folder
+    const experimentFolder = contents.find(
+      (item) => item.name === "experiment"
+    );
 
-    // if (!folder || folder.type !== "dir") {
-    //   console.error("Folder not found");
-    //   return;
-    // }
+    if (!experimentFolder || experimentFolder.type !== "dir") {
+      console.error("Experiment folder not found");
+      return;
+    }
 
-    // // Step 3: Get the URL of the static site in CodeSandbox.io using the folder path
-    // const sandboxUrl = `https://codesandbox.io/s/github/{OWNER}/{REPO}/tree/main/${folder.path}`;
+    // Step 3: Get the contents of the 'experiment' folder
+    const experimentFolderContentsResponse = await fetch(experimentFolder.url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const experimentFolderContents =
+      await experimentFolderContentsResponse.json();
 
-    // // Step 4: Open the CodeSandbox.io URL in a new window or tab
-    // window.open(sandboxUrl, "_blank");
+    // Step 4: Find the 'simulation' folder inside the 'experiment' folder
+    const simulationFolder = experimentFolderContents.find(
+      (item) => item.name === "simulation"
+    );
+
+    if (!simulationFolder || simulationFolder.type !== "dir") {
+      console.error("Simulation folder not found");
+      return;
+    }
+
+    // Step 5: Get the URL of the static site in CodeSandbox.io using the 'simulation' folder path
+    const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/tree/main/${simulationFolder.path}`;
+
+    // Step 6: Open the CodeSandbox.io URL in a new window or tab
+    window.open(sandboxUrl, "_blank");
   } catch (error) {
     console.error("Error:", error);
   }
