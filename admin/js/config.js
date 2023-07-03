@@ -239,7 +239,7 @@ async function open_code1() {
     }
 
     // Step 5: Get the URL of the static site in CodeSandbox.io using the 'simulation' folder path
-    const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/tree/main/`;
+    const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/tree/main/${simulationFolder.path}`;
 
     // Step 6: Open the CodeSandbox.io URL in a new window or tab
     window.open(sandboxUrl, "_blank");
