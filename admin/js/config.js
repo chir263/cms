@@ -188,5 +188,14 @@ function open_code() {
   const redirectUrl = `https://github.com/${ORGANISATION_NAME}/${EXPERIMENT}/codespaces?token=${accessToken}&folder=${encodeURIComponent(
     folderPath
   )}`;
-  window.location.href = redirectUrl;
+  window.open(redirectUrl, "_blank");
+}
+
+function open_code1() {
+  let accessToken = JSON.parse(localStorage.getItem("netlify-cms-user")).token;
+  window.open(
+    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
+    "_blank"
+  );
+  // Construct the redirect URL with the access token and repository information
 }
