@@ -28,45 +28,6 @@
       iframe.src = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`;
 
       // var iframe = document.getElementById("your-iframe-id");
-      iframe.addEventListener("load", function () {
-        var iframeWindow = iframe.contentWindow;
-
-        // Step 1: Click on the "Sign in" button within the iframe
-        var signInButton = findButtonByText(
-          iframeWindow.document,
-          "button",
-          "Sign In"
-        );
-        if (signInButton) signInButton.click();
-        else {
-          console.log("erroe");
-          return;
-        }
-
-        // Step 2: Check for the presence of the modal pane at regular intervals
-        var interval = setInterval(function () {
-          // Step 3: Click on the "Sign in with GitHub" button in the modal pane
-          var githubButton = findButtonByText(
-            iframeWindow.document,
-            "span",
-            "Sign in with GitHub"
-          );
-          if (githubButton) {
-            clearInterval(interval); // Stop the interval once the modal pane is found
-            githubButton.click();
-          }
-        }, 100); // Adjust the interval duration if needed
-      });
-
-      function findButtonByText(document, tag, buttonText) {
-        var buttons = document.getElementsByTagName(tag);
-        for (var i = 0; i < buttons.length; i++) {
-          if (buttons[i].textContent.trim() === buttonText) {
-            return buttons[i];
-          }
-        }
-        return null;
-      }
     </script>
   </body>
 </html>
