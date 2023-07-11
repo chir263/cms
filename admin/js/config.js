@@ -195,10 +195,8 @@ async function open_code1() {
   const accessToken = JSON.parse(
     localStorage.getItem("netlify-cms-user")
   ).token;
-  // Replace 'YOUR_GITHUB_ACCESS_TOKEN' with your actual GitHub OAuth access token
 
   try {
-    // Step 1: Get the contents of the repository's root directory using GitHub API
     const response = await fetch(
       `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main`,
       {
@@ -209,7 +207,6 @@ async function open_code1() {
     );
     const contents = await response.json();
 
-    // Step 2: Find the 'experiment' folder
     const experimentFolder = contents.find(
       (item) => item.name === "experiment"
     );
@@ -219,7 +216,6 @@ async function open_code1() {
       return;
     }
 
-    // Step 3: Get the contents of the 'experiment' folder
     const experimentFolderContentsResponse = await fetch(experimentFolder.url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -228,7 +224,6 @@ async function open_code1() {
     const experimentFolderContents =
       await experimentFolderContentsResponse.json();
 
-    // Step 4: Find the 'simulation' folder inside the 'experiment' folder
     const simulationFolder = experimentFolderContents.find(
       (item) => item.name === "simulation"
     );
@@ -238,10 +233,8 @@ async function open_code1() {
       return;
     }
 
-    // Step 5: Get the URL of the static site in CodeSandbox.io using the 'simulation' folder path
-    const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/tree/main/${simulationFolder.path}`;
+    const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`;
 
-    // Step 6: Open the CodeSandbox.io URL in a new window or tab
     window.open(sandboxUrl, "_blank");
   } catch (error) {
     console.error("Error:", error);
@@ -253,3 +246,5 @@ async function open_code1() {
   // );
   // Construct the redirect URL with the access token and repository information
 }
+
+// Failed to persist entry: API_ERROR: Although you appear to have the correct authorization credentials, the `virtual-labs-cms` organization has enabled OAuth App access restrictions, meaning that data access to third-parties is limited. For more information on these restrictions, including how to enable this app, visit https://docs.github.com/articles/restricting-access-to-your-organization-s-data/
