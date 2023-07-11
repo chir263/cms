@@ -197,43 +197,46 @@ async function open_code1() {
   ).token;
 
   try {
-    const response = await fetch(
-      `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    const contents = await response.json();
+    // const response = await fetch(
+    //   `https://api.github.com/repos/${ORGANISATION_NAME}/${EXPERIMENT}/contents?ref=main`,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //   }
+    // );
+    // const contents = await response.json();
 
-    const experimentFolder = contents.find(
-      (item) => item.name === "experiment"
-    );
+    // const experimentFolder = contents.find(
+    //   (item) => item.name === "experiment"
+    // );
 
-    if (!experimentFolder || experimentFolder.type !== "dir") {
-      console.error("Experiment folder not found");
-      return;
-    }
+    // if (!experimentFolder || experimentFolder.type !== "dir") {
+    //   console.error("Experiment folder not found");
+    //   return;
+    // }
 
-    const experimentFolderContentsResponse = await fetch(experimentFolder.url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const experimentFolderContents =
-      await experimentFolderContentsResponse.json();
+    // const experimentFolderContentsResponse = await fetch(experimentFolder.url, {
+    //   headers: {
+    //     Authorization: `Bearer ${accessToken}`,
+    //   },
+    // });
+    // const experimentFolderContents =
+    //   await experimentFolderContentsResponse.json();
 
-    const simulationFolder = experimentFolderContents.find(
-      (item) => item.name === "simulation"
-    );
+    // const simulationFolder = experimentFolderContents.find(
+    //   (item) => item.name === "simulation"
+    // );
 
-    if (!simulationFolder || simulationFolder.type !== "dir") {
-      console.error("Simulation folder not found");
-      return;
-    }
-
-    const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`;
+    // if (!simulationFolder || simulationFolder.type !== "dir") {
+    //   console.error("Simulation folder not found");
+    //   return;
+    // }
+    var params = new URLSearchParams();
+    params.append("EXPERIMENT", EXPERIMENT);
+    params.append("ORGANISATION_NAME", ORGANISATION_NAME);
+    window.open(`/admin/codesandbox?` + params.toString(), "_blank");
+    // const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`;
 
     window.open(sandboxUrl, "_blank");
   } catch (error) {
