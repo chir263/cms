@@ -178,17 +178,21 @@ function open_deploy() {
 }
 
 function open_code() {
-  let accessToken = JSON.parse(localStorage.getItem("netlify-cms-user")).token;
-  // window.open(
-  //   `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
-  //   "_blank"
-  // );
-  // Construct the redirect URL with the access token and repository information
-  const folderPath = "experiment/simulation";
-  const redirectUrl = `https://github.com/${ORGANISATION_NAME}/${EXPERIMENT}/codespaces?token=${accessToken}&folder=${encodeURIComponent(
-    folderPath
-  )}`;
-  window.open(redirectUrl, "_blank");
+  // let accessToken = JSON.parse(localStorage.getItem("netlify-cms-user")).token;
+  // // window.open(
+  // //   `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}?access_token=${accessToken}`,
+  // //   "_blank"
+  // // );
+  // // Construct the redirect URL with the access token and repository information
+  // const folderPath = "experiment/simulation";
+  // const redirectUrl = `https://github.com/${ORGANISATION_NAME}/${EXPERIMENT}/codespaces?token=${accessToken}&folder=${encodeURIComponent(
+  //   folderPath
+  // )}`;
+  // window.open(redirectUrl, "_blank");
+  var params = new URLSearchParams();
+  params.append("EXPERIMENT", EXPERIMENT);
+  params.append("ORGANISATION_NAME", ORGANISATION_NAME);
+  window.open(`/admin/codespace?` + params.toString(), "_blank");
 }
 
 async function open_code1() {
