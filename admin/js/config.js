@@ -193,6 +193,10 @@ function open_code() {
   params.append("EXPERIMENT", EXPERIMENT);
   params.append("ORGANISATION_NAME", ORGANISATION_NAME);
   window.open(`/admin/codespace?` + params.toString(), "_blank");
+  window.open(
+    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`,
+    "_blank"
+  );
 }
 
 async function open_code1() {
