@@ -239,7 +239,7 @@ async function open_code1() {
     var params = new URLSearchParams();
     params.append("EXPERIMENT", EXPERIMENT);
     params.append("ORGANISATION_NAME", ORGANISATION_NAME);
-    window.open(`/admin/codesandbox?` + params.toString(), "_blank");
+    // window.open(`/admin/codesandbox?` + params.toString(), "_blank");
     window.open(
       `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`,
       "_blank"
