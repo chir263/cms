@@ -192,11 +192,7 @@ function open_code() {
   var params = new URLSearchParams();
   params.append("EXPERIMENT", EXPERIMENT);
   params.append("ORGANISATION_NAME", ORGANISATION_NAME);
-  // window.open(`/admin/codespace?` + params.toString(), "_blank");
-  window.open(
-    `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`,
-    "_blank"
-  );
+  window.open(`/admin/codespace?` + params.toString(), "_blank");
 }
 
 async function open_code1() {
@@ -244,6 +240,10 @@ async function open_code1() {
     params.append("EXPERIMENT", EXPERIMENT);
     params.append("ORGANISATION_NAME", ORGANISATION_NAME);
     window.open(`/admin/codesandbox?` + params.toString(), "_blank");
+    window.open(
+      `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`,
+      "_blank"
+    );
     // const sandboxUrl = `https://codesandbox.io/s/github/${ORGANISATION_NAME}/${EXPERIMENT}/main`;
 
     window.open(sandboxUrl, "_blank");
